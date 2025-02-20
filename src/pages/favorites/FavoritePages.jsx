@@ -59,7 +59,7 @@ const FavoritePage = () => {
 
     }, [matches, favorites]);
 
-    const dogItems = getFavs.map((dog, idx) => <DogCard key={idx} dog={dog} favorites={favorites} isFavoriteButton={true} matches={matches} onMatchChange={handleMatches} onFavoriteChange={handleFavoriteChange} isMatchButton={true} isFavPage={true}/>);
+    const dogItems = getFavs.map((dog) => <DogCard key={dog.id} dog={dog} favorites={favorites} isFavoriteButton={true} matches={matches} onMatchChange={handleMatches} onFavoriteChange={handleFavoriteChange} isMatchButton={true} isFavPage={true}/>);
 
     return <div className="flex justify-center h-screen bg-neutral-10 relative">
         <NavBar />

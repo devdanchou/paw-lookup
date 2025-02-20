@@ -18,7 +18,7 @@ const ResultsPage = (props) => {
         localStorageService.setItem("favorites", favorites);
     }, [favorites]);
 
-    const dogItems = dogData.map((dog, idx) => <DogCard key={idx} dog={dog} isFavoriteButton={true} favorites={favorites} onFavoriteChange={handleFavoriteChange} isMatchButton={false} isFavPage={false}/>);
+    const dogItems = dogData.map((dog) => <DogCard key={dog.id} dog={dog} isFavoriteButton={true} favorites={favorites} onFavoriteChange={handleFavoriteChange} isMatchButton={false} isFavPage={false}/>);
 
     return <div className="flex flex-wrap items-center justify-center mt-10">
         {dogItems}
