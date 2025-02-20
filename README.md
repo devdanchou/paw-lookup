@@ -1,8 +1,14 @@
 # Paw Lookup
+A sleek, responsive site to help you find your perfect dog!
+
+
+<img width="1728" alt="paw-lookup-login" src="https://github.com/user-attachments/assets/2f988ae2-5086-4fe4-9ae8-64d29c5ddd47" />
+
+
 
 This site was built using React and deployed w/ Vercel.
 
-
+visit @ https://paw-lookup-sigma.vercel.app/
 # Available Scripts
 If cloning this repo and running from the shell, be sure to run:
 
