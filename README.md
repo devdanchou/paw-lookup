@@ -6,6 +6,9 @@ A sleek, responsive site to help you find your perfect dog match!
 
 
 
+[Watch Demo on Vimeo](https://vimeo.com/1058661219/0696f3d5a2?ts=0&share=copy)
+
+
 This site was built using React and deployed w/ Vercel.
 
 visit @ https://paw-lookup-sigma.vercel.app/
