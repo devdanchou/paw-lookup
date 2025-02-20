@@ -75,7 +75,7 @@ const SearchPage = () => {
         fetchData().then(data => setDogBreeds(data));
     }, [sortOption, initialValues]);
 
-    return <div className="flex flex-col justify-center min-h-screen w-full bg-neutral-100">
+    return <div className="flex flex-col justify-center min-h-screen w-full bg-neutral-100 overflow-hidden">
         <NavBar />
         <div className="flex mt-20 mx-12">
             <div className="mr-10 w-full max-w-md flex flex-col items-center px-2 pb-4 m-2 pt-5">
@@ -147,7 +147,10 @@ const SearchPage = () => {
             </div>}
 
             {
-                dogData.length === 0 && <LandingPage />
+                dogData.length === 0 &&
+                <div className="w-full max-w-8xl mx-6 pt-6 pl-5 mr-10">
+                    <LandingPage />
+                </div>
             }
 
             <div className="flex flex-col items-center flex-1 justify-start right-5 mt-12">

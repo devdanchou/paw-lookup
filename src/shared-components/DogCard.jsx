@@ -47,7 +47,7 @@ const DogCard = (props) => {
     };
 
     return <div
-        className={clsx("border border-neutral-200 flex flex-col overflow-clip m-3 pb-2 rounded-md shadow-md font-redHat w-80 relative bg-neutral-50", isMatch && "cursor-pointer border-4 border-blue-500")}
+        className={clsx("border border-neutral-200 flex flex-col overflow-clip m-3 pb-2 rounded-md shadow-md font-redHat w-80 relative bg-neutral-50", isMatch && "cursor-pointer border-4 border-purple-500")}
         onClick={isMatchButton ? () => handleMatch(dog) : undefined}>
         {isFavoriteButton && !isFavPage
             && <button

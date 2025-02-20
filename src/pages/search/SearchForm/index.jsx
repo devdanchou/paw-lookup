@@ -37,7 +37,7 @@ const SearchForm = (props) => {
     };
 
     return <form
-        className="font-lato text-slate-500 text-md w-full border-b border-x border-slate-200 shadow-md pt-1 pb-10 bg-neutral-50 rounded-b-md"
+        className="font-lato text-slate-500 text-md w-[350px] border-b border-x border-slate-200 shadow-md pt-1 pb-10 bg-neutral-50 rounded-b-md px-4"
         onSubmit={async (e) => {
             // onHandleValues(values);
             e.preventDefault();
@@ -81,7 +81,7 @@ const SearchForm = (props) => {
         </div>
         <div className="flex justify-center">
             <button
-                className="text-white py-2 mt-4 mb-1 rounded-lg bg-fuchsia-700 hover:bg-fuchsia-600 text-lg w-[76%]"
+                className="text-white py-2 mt-4 mb-1 rounded-lg bg-fuchsia-700 hover:bg-fuchsia-600 text-lg w-[290px]"
                 onClick={async (e) => {
                     e.preventDefault();
                     const updatedValues = {

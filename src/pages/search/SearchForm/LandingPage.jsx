@@ -4,11 +4,11 @@ import DogCard from "../../../shared-components/DogCard";
 const LandingPage = () => {
     const dogItems = sampleData.map((dog, idx) => <DogCard key={idx} dog={dog} isFavoriteButton={false} />);
 
-    return <div className="flex flex-col mt-[63px] mb-5 border-2 border-slate-200 w-full text-fuchsia-700 font-medium rounded-l-md rounded-r-md shadow-lg overflow-clip">
+    return <div className="flex flex-col mt-10 mb-10 border-2 border-slate-200 w-[85%] text-fuchsia-700 font-medium rounded-l-md rounded-r-md shadow-lg overflow-clip mr-5">
         <div className="flex overflow-clip">
             <div className="w-[50%] min-w-7xl font-lato flex flex-col items-center justify-center">
                 <i className="fa-solid fa-paw text-8xl"></i>
-                <div className="text-4xl mb-7 mt-6">Welcome to Paw Lookup!</div>
+                <div className="text-3xl font-semibold mb-7 mt-6">Welcome to Paw Lookup!</div>
                 <div className="text-xl mb-4">Discover your one-of-a-kind furry friend</div>
             </div>
             <div className="relative hidden md:flex w-full rounded-r-md">
@@ -29,7 +29,7 @@ const LandingPage = () => {
             </div>
             <div className="flex flex-col w-full overflow-hidden">
                 <div className="bg-purple-100 py-1"></div>
-                <div className="flex justify-around w-full my-4">
+                <div className="flex justify-around w-full min-w-7xl my-4">
                     {dogItems}
                 </div>
             </div>
