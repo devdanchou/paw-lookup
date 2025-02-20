@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import SearchForm from "./SearchForm";
 import * as dogService from "../../services/dogs";
 import zipcodes from "./../../assets/zipcodes";
@@ -8,12 +7,11 @@ import MatchContainer from "./MatchContainer";
 import NavBar from "../../shared-components/Navbar";
 import Chevron from "../../shared-components/Chevron";
 import SortField from "../results/SortField";
-import * as localStorageService from "../../services/local-storage";
+import LandingPage from "./SearchForm/LandingPage";
 
 const BASE_URL = "https://frontend-take-home-service.fetch.com";
 
 const SearchPage = () => {
-    // const storedState = localStorageService.getItem("searchPageState");
     const [dogBreeds, setDogBreeds] = useState([]);
     const [startAge, setStartAge] = useState(1);
     const [endAge, setEndAge] = useState(20);
@@ -23,15 +21,6 @@ const SearchPage = () => {
     const [sortOption, setSortOption] = useState("asc");
     const [isSortListOpen, setIsSortListOpen] = useState(false);
     const [initialValues, setInitalValues] = useState(null);
-    // const [dogBreeds, setDogBreeds] = useState([]);
-    // const [startAge, setStartAge] = useState(storedState?.startAge || 1);
-    // const [endAge, setEndAge] = useState(storedState?.endAge || 20);
-    // const [dogData, setDogData] = useState(storedState?.dogData || []);
-    // const [nextPage, setNextPage] = useState(null);
-    // const [prevPage, setPrevPage] = useState(null);
-    // const [sortOption, setSortOption] = useState(storedState?.sortOption || "asc");
-    // const [isSortListOpen, setIsSortListOpen] = useState(false);
-    // const [initialValues, setInitalValues] = useState(storedState?.initialValues || null);
 
     const fetchData = async () => {
         await dogService.getSearch({
@@ -41,11 +30,9 @@ const SearchPage = () => {
             ageMax: initialValues?.endAge,
             sort: `breed:${sortOption}`
         }).then((response) => {
-            console.log({ response });
             return response.json();
         }).then((data) => {
             setNextPage(data.next ? `${BASE_URL}${data.next}` : null);
-            console.log({ nextPage });
             setPrevPage(data.prev ? `${BASE_URL}${data.prev}` : null);
             return dogService.fetchDogs(data.resultIds);
         }).then((resultResponse) => {
@@ -64,7 +51,6 @@ const SearchPage = () => {
         setPrevPage(data.prev ? `${BASE_URL}${data.prev}` : null);
         const dogResponse = await dogService.fetchDogs(data.resultIds);
         const dogData = await dogResponse.json();
-        console.log('pagination');
         setDogData(dogData);
     };
 
@@ -73,7 +59,6 @@ const SearchPage = () => {
     };
 
     const handleValues = (values) => {
-        console.log({ values });
         setInitalValues(values);
     };
 
@@ -89,29 +74,6 @@ const SearchPage = () => {
     useEffect(() => {
         fetchData().then(data => setDogBreeds(data));
     }, [sortOption, initialValues]);
-
-    // useEffect(() => {
-    //     localStorageService.setItem("searchPageState", {
-    //         startAge,
-    //         endAge,
-    //         sortOption,
-    //         initialValues,
-    //         dogData
-    //     });
-    // }, []);
-
-    // useEffect(() => {
-    //     const savedState = localStorageService.getItem("searchPageState");
-    //     if (savedState) {
-    //         setStartAge(savedState.startAge || 1);
-    //         setEndAge(savedState.endAge || 20);
-    //         setSortOption(savedState.sortOption || "asc");
-    //         setInitalValues(savedState.initialValues || null);
-    //         setDogData(savedState.dogData || []);
-    //     }
-    // }, []);
-
-
 
     return <div className="flex flex-col justify-center min-h-screen w-full bg-neutral-100">
         <NavBar />
@@ -160,7 +122,7 @@ const SearchPage = () => {
                 />
             </div>
             {dogData.length > 0 && <div className="flex flex-col">
-                <div className="w-full flex-1 max-w-7xl mx-6 pt-6">
+                <div className="w-full flex-1 max-w-8xl mx-6 pt-6">
                     <ResultsPage dogData={dogData} />
                 </div>
                 {
@@ -169,14 +131,14 @@ const SearchPage = () => {
                         <button
                             onClick={() => handlePaginate(prevPage)}
                             disabled={!prevPage}
-                            className="font-lato text-white w-[15%] py-2 mt-4 mb-1 rounded-lg bg-fuchsia-700 hover:bg-fuchsia-600 text-lg w-[120px] mr-10">
+                            className="font-lato text-white w-[10%] py-2 mt-4 mb-1 rounded-lg bg-fuchsia-700 hover:bg-fuchsia-600 text-lg w-[120px] mr-10">
                             <i className="fa-solid fa-arrow-left mr-2 text-lg"></i>
                             Previous
                         </button>
                         <button
                             onClick={() => handlePaginate(nextPage)}
                             disabled={!nextPage}
-                            className="font-lato text-white w-[15%] py-2 mt-4 mb-1 rounded-lg bg-fuchsia-700 hover:bg-fuchsia-600 text-lg w-[120px]">
+                            className="font-lato text-white w-[10%] py-2 mt-4 mb-1 rounded-lg bg-fuchsia-700 hover:bg-fuchsia-600 text-lg w-[120px]">
                             Next
                             <i className="fa-solid fa-arrow-right ml-2 text-lg"></i>
                         </button>
@@ -185,17 +147,11 @@ const SearchPage = () => {
             </div>}
 
             {
-                dogData.length === 0 && <div className="flex flex-col mt-12">
-                    <div className="w-full  h-[50rem]flex-1 max-w-7xl mx-6 pt-6 relative pb-6 bg-fuchsia-700 mt-4">
-                        <img
-                        className="object-cover w-full rounded-sm shadow-md"
-                        src="https://images.pexels.com/photos/1718181/pexels-photo-1718181.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"/>
-                    </div>
-                    </div>
+                dogData.length === 0 && <LandingPage />
             }
 
-            <div className="flex flex-col items-center flex-1 justify-start right-5">
-                {dogData.length > 0 && <div className="w-[195px] text-gray-500 my-5 mr-6  border border-gray-200 rounded-md">
+            <div className="flex flex-col items-center flex-1 justify-start right-5 mt-12">
+                {dogData.length > 0 && <div className="w-[195px] text-gray-500 mt-6 mr-10  border border-gray-200 rounded-md">
                     <Chevron label={"Sort: Breed"} isOpen={isSortListOpen} onToggle={() => setIsSortListOpen(!isSortListOpen)} option={`(${sortOption})`} />
                     {isSortListOpen && <SortField onSelectSort={selectSortOption} />}
                 </div>}

@@ -1,10 +1,10 @@
-import { useState, useEffect, use } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import * as localStorageService from "../services/local-storage";
 
 const DogCard = (props) => {
-    const { dog, favorites, onFavoriteChange, isFavoriteButton, matches, onMatchChange, isMatchButton } = props;
+    const { dog, favorites, onFavoriteChange, isFavoriteButton, matches, onMatchChange, isMatchButton, isFavPage } = props;
 
 
     const [isFavorite, setIsFavorite] = useState(false);
@@ -23,7 +23,7 @@ const DogCard = (props) => {
         }
     };
 
-    const handleMatch = (dog, ) => {
+    const handleMatch = (dog,) => {
         setIsMatch(!isMatch);
 
         const isCurrDogMatch = matches.some((d) => d.id === dog.id);
@@ -36,7 +36,6 @@ const DogCard = (props) => {
     };
 
     const handleFavorite = (dog) => {
-        console.log({ dog });
         setIsFavorite(!isFavorite);
 
         const isCurrDogFav = favorites.some((d) => d.id === dog.id);
@@ -48,9 +47,9 @@ const DogCard = (props) => {
     };
 
     return <div
-        className={clsx("border border-neutral-200 flex flex-col overflow-clip m-3 pb-2 rounded-md shadow-md font-redHat w-72 relative bg-neutral-50", isMatch && "border-2 border-rose-300")}
+        className={clsx("border border-neutral-200 flex flex-col overflow-clip m-3 pb-2 rounded-md shadow-md font-redHat w-80 relative bg-neutral-50", isMatch && "cursor-pointer border-4 border-blue-500")}
         onClick={isMatchButton ? () => handleMatch(dog) : undefined}>
-        {isFavoriteButton
+        {isFavoriteButton && !isFavPage
             && <button
                 className="absolute top-2 right-2 px-2 py-1 bg-white rounded-full"
                 onClick={() => {
@@ -59,10 +58,17 @@ const DogCard = (props) => {
                 <i className={clsx("text-lg fa-regular fa-heart text-fuchsia-700", isFavorite && "font-bold animate-pulse-2s")}></i></button>
         }
 
-
+        {isFavoriteButton && isFavPage
+            && <button
+                className="absolute top-2 right-2 px-2 py-1 bg-white rounded-full"
+                onClick={() => {
+                    handleFavorite(dog);
+                }}>
+                <i className={clsx("text-lg fa-regular fa-heart font-bold text-fuchsia-700")}></i></button>
+        }
 
         <img
-            className="object-cover h-64"
+            className={clsx("object-cover h-64", isMatch && "cursor-pointer")}
             src={dog.img}
             alt="Dog profile pic" />
         <div className="flex justify-center pt-2 text-fuchsia-700 font-semibold text-xl">{dog.name}</div>

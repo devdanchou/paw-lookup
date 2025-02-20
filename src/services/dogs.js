@@ -7,7 +7,6 @@ export const getBreeds = () => {
 };
 export const getSearch = ({ breeds, zipCodes, ageMin, ageMax, sort }) => {
   const breedsQuery = breeds.map(breed => `breeds=${encodeURIComponent(breed)}`).join("&");
-  console.log({breedsQuery})
   const zipCodesQuery = zipCodes.map(zipCode => `zipCodes=${encodeURIComponent(zipCode)}`).join("&");
 
   return fetch(`https://frontend-take-home-service.fetch.com/dogs/search?${breedsQuery}&${zipCodesQuery}&ageMin=${ageMin}&ageMax=${ageMax}&sort=${sort}`, {

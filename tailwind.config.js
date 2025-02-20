@@ -11,8 +11,15 @@ export default {
       },
       animation: {
         'pulse-2s': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1)',
+        'marquee': 'marquee 15s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          from: { transform: 'translateX(100%)' },
+          to: { transform: 'translateX(-100%)' },
+        },
       },
     },
-  },
-  plugins: [],
+    plugins: [],
+  }
 };

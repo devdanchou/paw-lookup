@@ -16,7 +16,6 @@ const FavoritePage = () => {
     const navigate = useNavigate();
 
     const handleMatches = (updatedMatches, ) => {
-        console.log({ updatedMatches });
         localStorageService.setItem("matches", updatedMatches);
         setMatches(updatedMatches);
     };
@@ -40,7 +39,6 @@ const FavoritePage = () => {
             }).then((resultResponse) => {
                 return resultResponse.json();
             }).then((matchedDogData) => {
-                console.log({ matchedDogData });
                 localStorageService.setItem("match", matchedDogData);
             }).catch((error) => {
                 console.error("Error occurred:", error);
@@ -61,16 +59,11 @@ const FavoritePage = () => {
 
     }, [matches, favorites]);
 
-    const dogItems = getFavs.map((dog, idx) => <DogCard key={idx} dog={dog} favorites={favorites} isFavoriteButton={true} matches={matches} onMatchChange={handleMatches} onFavoriteChange={handleFavoriteChange} isMatchButton={true} />);
+    const dogItems = getFavs.map((dog, idx) => <DogCard key={idx} dog={dog} favorites={favorites} isFavoriteButton={true} matches={matches} onMatchChange={handleMatches} onFavoriteChange={handleFavoriteChange} isMatchButton={true} isFavPage={true}/>);
 
     return <div className="flex justify-center h-screen bg-neutral-10 relative">
         <NavBar />
         <div className="mt-20">
-            <button
-                className="fixed top-20 left-10 mt-5 text-fuchsia-700 hover:text-fuchsia-600 p-2 text-xl font-semibold"
-                onClick={(() => navigate('/searches'))}>
-                <i className="fa-solid fa-arrow-left mr-2"></i>
-                search</button>
             <div className="flex flex-col items-center">
                 <div className="font-lato text-5xl font-medium text-fuchsia-700 mt-10 text-center">Favorites</div>
                 {getFavs.length > 0 &&

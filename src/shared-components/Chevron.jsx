@@ -4,7 +4,7 @@ const Chevron = (props) => {
     const { label, onToggle, isOpen, option } = props;
 
     return (
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full cursor-pointer">
             <div className={clsx("flex justify-between bg-gray-100  px-2 py-3 border border-slate-200 w-full",
                 isOpen ? "rounded-t-md" : "rounded-md")}
                 onClick={onToggle}>
